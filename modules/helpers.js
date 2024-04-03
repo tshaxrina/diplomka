@@ -1,7 +1,8 @@
 export function reload(arr) {
     for (let i of arr) {
       //creating
-  
+      let cont = document.querySelector('.wrap .container')
+
       let item = document.createElement('div')
       let item_top = document.createElement('div')
       let itop_img = document.createElement('img')
@@ -11,6 +12,7 @@ export function reload(arr) {
       let item_bottom = document.createElement('div')
       let i_name = document.createElement('a')
       let rating = document.createElement('div')
+      let star = document.createElement('img')
       let i_rating = document.createElement('p')
       let month = document.createElement('div')
       let price = document.createElement('div')
@@ -32,6 +34,25 @@ export function reload(arr) {
       new_price.classList.add('new_price')
   
       //
-  
+      itop_img.src = "/icons/oil.jpg"
+      b_img.src = "/icons/free-icon-heart-3502230.png"
+      black_fr.innerHTML = "Акция"
+      i_name.innerHTML = "Маслощзшшзхшхш"
+      star.src = "/icons/free-icon-star-8358826.png"
+      i_rating.innerHTML = 4.8
+      month.innerHTML = "1462 сум/мес"
+      old_price.innerHTML = "100 сум"
+      new_price.innerHTML = "13 сум"
+      basket_img.src = "/icons/free-icon-shopping-bag-4903482.png"
+
+      //appending
+      item.append(item_top, item_bottom)
+      item_top.append(itop_img, b_heart, black_fr)
+      b_heart.append(b_img)
+      item_bottom.append(i_name, rating, month, price, b_basket)
+      rating.append(star, i_rating)
+      price.append(old_price, new_price)
+      b_basket.append(basket_img)
+      cont.append(item)
     }
   }
