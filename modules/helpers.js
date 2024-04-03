@@ -34,15 +34,15 @@ export function reload(arr) {
       new_price.classList.add('new_price')
   
       //
-      itop_img.src = "/icons/oil.jpg"
+      itop_img.src = i.media
       b_img.src = "/icons/free-icon-heart-3502230.png"
       black_fr.innerHTML = "Акция"
-      i_name.innerHTML = "Маслощзшшзхшхш"
+      i_name.innerHTML = i.title
       star.src = "/icons/free-icon-star-8358826.png"
-      i_rating.innerHTML = 4.8
+      i_rating.innerHTML = i.rating
       month.innerHTML = "1462 сум/мес"
-      old_price.innerHTML = "100 сум"
-      new_price.innerHTML = "13 сум"
+      old_price.innerHTML = i.price
+      new_price.innerHTML = i.price
       basket_img.src = "/icons/free-icon-shopping-bag-4903482.png"
 
       //appending
