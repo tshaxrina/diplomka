@@ -1,8 +1,7 @@
-export function reload(arr) {
+export function reload(arr, place) {
     for (let i of arr) {
       //creating
-      let cont = document.querySelector('.wrap .container')
-
+        place.innerHTML = ""
       let item = document.createElement('div')
       let item_top = document.createElement('div')
       let itop_img = document.createElement('img')
@@ -53,6 +52,6 @@ export function reload(arr) {
       rating.append(star, i_rating)
       price.append(old_price, new_price)
       b_basket.append(basket_img)
-      cont.append(item)
+      place.append(item)
     }
   }
