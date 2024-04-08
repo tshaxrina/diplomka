@@ -10,11 +10,11 @@ getData("/goods?id").then((res) => {
 		reload(res.data[0], cont);
 	}
 });
-// axios.get(url + id).then((res) => reloadforProduct(res.data[0]));
-// fetch(URL)
-//     .then(res => res.json())
-//     .then(res => {
-//         reload(res)
-//         goods = res
-//     })
+fetch("db.json")
+    .then(res => res.json())
+    .then(res => {
+		console.log(res.goods);
+        // reload(res, cont)
+	})
+
 

@@ -1,7 +1,7 @@
 export function reload(arr, place) {
+  place.innerHTML = ""
     for (let i of arr) {
       //creating
-        place.innerHTML = ""
       let item = document.createElement('div')
       let item_top = document.createElement('div')
       let itop_img = document.createElement('img')
@@ -33,15 +33,15 @@ export function reload(arr, place) {
       new_price.classList.add('new_price')
   
       //
-      itop_img.src = i.media
+      itop_img.src = i.media[0]
       b_img.src = "/icons/free-icon-heart-3502230.png"
       black_fr.innerHTML = "Акция"
-      i_name.innerHTML = i.title
+      i_name.innerHTML = i.title[0]
       star.src = "/icons/free-icon-star-8358826.png"
-      i_rating.innerHTML = i.rating
+      i_rating.innerHTML = i.rating[0]
       month.innerHTML = "1462 сум/мес"
-      old_price.innerHTML = i.price
-      new_price.innerHTML = i.price
+      old_price.innerHTML = i.price[0]
+      new_price.innerHTML = i.price[0]
       basket_img.src = "/icons/free-icon-shopping-bag-4903482.png"
 
       //appending
