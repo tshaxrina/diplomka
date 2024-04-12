@@ -138,7 +138,8 @@ export function createHeader(place) {
 
   //styling
   header_main.classList.add('header')
-  cont_disp.classList.add('container display')
+  cont_disp.classList.add('container')
+  cont_disp.classList.add('display')
   logo.classList.add('logo')
   catalog.classList.add('catalog')
   search.classList.add('search')
@@ -187,7 +188,8 @@ export function createHeader(place) {
 
   //styling
   header_bottom.classList.add('header_bottom')
-  cont_disp_2.classList.add('container display')
+  cont_disp_2.classList.add('container')
+  cont_disp_2.classList.add('display')
   a.classList.add('a')
 
   //
