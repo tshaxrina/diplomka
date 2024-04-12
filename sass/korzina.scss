@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: myFont;
+}
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+   
+}
+.place {
+    border-width: 1px;
+    border-color: #555;
+    width: 906px;
+
+}
+.product {
+    display: flex;
+    gap: 10px;
+}
+.calculator {
+    width: 418px;
+    height: 265px;
+    border-width: 3px;
+    border-color: red;
+    padding: 5px;
+    margin: 5px;
+}
+.product_left img {
+ width: 143px;   
+ height: 187px;
+
+}
+.amount {
+    display: flex;
+    border-width: 5px;
+    border-color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 40px;
+    margin-left: 0px;
+    align-items: center;
+    padding: 0px;
+}
+.amount button {
+    border-width: 0px;
+    background-color: white;
+}
+.product_right a{
+    text-decoration: none;
+        color: black;
+        font-size: xx-large;
+        margin-bottom: 7px;
+}
+.product_right p {
+    margin-top: 5px;
+    color: #555;
+    font-size: small;
+}
+.product_right p span {
+    color: black;
+}
+.price {
+    margin-top: 15px;
+}
+.remove {
+    background-color: #EAEAF9;
+    color: #3333CC;
+    border-width: 0px;
+    border-radius: 4px;
+    width: 80px;
+    height: 32px;
+}
+.calculator p {
+    color: #555;
+}
+.final_price {
+    color: black;
+}
+.tomorrow {
+    border-width: 1px;
+    border-color: #6701ec;
+    background-color: #fff;
+    color: #6701ec;
+    width: 300px;
+    height: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+
+}
+.calculator a{
+    text-decoration: none;
+    color: green;
+    font-size: smaller;
+}
+.go {
+    margin-top: 15px;
+    width: 300px;
+    height: 30px;
+    background-color: #3333CC;
+    color: #fff;
+    border-radius: 10px;
+    font-size: medium;
+    border-width: 0px;
+}
+.calculator h4 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.delivery {
+    width: 300px;
+    padding: 10px;
+    margin: 5px;
+    background-color: rgb(203, 203, 203);
+    border-radius: 10px;
+}
+.path {
+    height: 2px;
+    width: 277px;
+    background-color: green;
+    border-radius: 1px;
+    margin-top: 10px;
+    margin-bottom: 1px;
+}
+.delivery a {
+    text-decoration: none;
+    color: green;
+    font-size: smaller;
+}
+.product_right {
+    width: 700px;
+}
+.product_left {
+    display: flex;
+    gap: 3px;
+}

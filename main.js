@@ -1,20 +1,18 @@
-import { reload } from "./modules/helpers";
+import { reload, createHeader } from "./modules/helpers";
 import { getData } from "./modules/http";
-// import {goods} from "./db.json"
-// reload(goods)
-let goods = JSON.parse(localStorage.getItem('goods')) || null
+
 let cont = document.querySelector('.wrap .container')
+let body = document.body
 
 getData("/goods?id").then((res) => {
 	if (res.status === 200 || res.status === 201) {
-		reload(res.data[0], cont);
+		reload(res.data, cont);
 	}
 });
 fetch("db.json")
     .then(res => res.json())
     .then(res => {
-		console.log(res.goods);
-        // reload(res, cont)
+        reload(res, cont)
 	})
-
-
+	
+createHeader(body)
