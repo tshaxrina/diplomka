@@ -61,7 +61,7 @@ export function reload(arr, place) {
 
 export function createHeader(place) {
   //creating
-  let header = document.querySelector("header")
+  let header = document.createElement('header')
   //header_top
   let header_top = document.createElement('div')
   let container = document.createElement('div')
