@@ -4,6 +4,7 @@ import { getData } from "./modules/http";
 let cont = document.querySelector('.wrap .container')
 let body = document.body
 let inp_search = document.querySelector('#search')
+let goods = JSON.parse(localStorage.getItem("goods")) || null
 
 getData("/goods?id").then((res) => {
 	if (res.status === 200 || res.status === 201) {
@@ -15,7 +16,6 @@ getData("/goods?id").then((res) => {
 //     .then(res => {
 //         reload(res, cont)
 // 	})
-	
 createHeader(body)
 createFooter(body)
 
