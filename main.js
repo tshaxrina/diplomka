@@ -1,4 +1,4 @@
-import { reload, createHeader } from "./modules/helpers";
+import { reload, createHeader, createFooter } from "./modules/helpers";
 import { getData } from "./modules/http";
 
 let cont = document.querySelector('.wrap .container')
@@ -9,10 +9,11 @@ getData("/goods?id").then((res) => {
 		reload(res.data, cont);
 	}
 });
-fetch("db.json")
-    .then(res => res.json())
-    .then(res => {
-        reload(res, cont)
-	})
+// fetch("db.json")
+//     .then(res => res.json())
+//     .then(res => {
+//         reload(res, cont)
+// 	})
 	
 createHeader(body)
+createFooter(body)

@@ -80,6 +80,7 @@ export function createHeader(place) {
   let q_a = document.createElement('a')
   let my_order = document.createElement('a')
   let lang = document.createElement('a')
+  let lang_p = document.createElement('p')
   let lang_img = document.createElement('img')
 
   //styling header_top
@@ -100,7 +101,7 @@ export function createHeader(place) {
   blue.innerHTML = "Продавайте на Uzum"
   q_a.innerHTML = "Вопрос-ответ"
   my_order.innerHTML = "Мои заказы"
-  lang.innerHTML = "Русский"
+  lang_p.innerHTML = "Русский"
   lang_img.src = "/icons/free-icon-russia-323300.png"
 
   //apending
@@ -111,7 +112,7 @@ export function createHeader(place) {
   loc.append(loc_span)
   center.append(grey)
   left.append(q_a, my_order,lang)
-  lang.append(lang_img)
+  lang.append(lang_img, lang_p)
 
   //header
   let header_main = document.createElement('div')
@@ -212,5 +213,113 @@ export function createHeader(place) {
     beauty, healthy, homes, repair, more)
 
   header.append(header_top, header_main, header_bottom)
-  place.append(header)
+  place.prepend(header)
+} 
+
+export function createFooter(place) {
+  //creating
+  let footer = document.createElement('footer')
+  let grid = document.createElement('div')
+  let cont_disp = document.createElement('div')
+  let gr = document.createElement('div')
+  let about = document.createElement('p')
+  let pv = document.createElement('a')
+  let vkn = document.createElement('a')
+  let gr_1 = document.createElement('div')
+  let user = document.createElement('p')
+  let contact = document.createElement('a')
+  let qa = document.createElement('a')
+  let gr_2 = document.createElement('div')
+  let for_pr = document.createElement('p')
+  let sell = document.createElement('a')
+  let for_sell = document.createElement('a')
+  let gr_3 = document.createElement('div')
+  let social = document.createElement('div')
+  let instl = document.createElement('p')
+  let app_st = document.createElement('a')
+  let app_st_img = document.createElement('img')
+  let google = document.createElement('a')
+  let google_img = document.createElement('img')
+  let social_1 = document.createElement('div')
+  let soc_p = document.createElement('p')
+  let inst = document.createElement('a')
+  let inst_img = document.createElement('img')
+  let tg = document.createElement('a')
+  let tg_img = document.createElement('img')
+  let youtube = document.createElement('a')
+  let youtube_img = document.createElement('img')
+  let fcbook = document.createElement('a')
+  let fcbook_img = document.createElement('img')
+
+  let container = document.createElement('div')
+  let hr = document.createElement('hr')
+  let foot = document.createElement('div')
+  let left = document.createElement('div')
+  let sogl = document.createElement('p')
+  let sogll = document.createElement('p')
+  let right = document.createElement('div')
+  let right_a = document.createElement('a')
+
+  //styling
+  grid.classList.add('grid')
+  grid.classList.add('grid')
+  cont_disp.classList.add('container')
+  cont_disp.classList.add('display')
+  gr.classList.add('gr')
+  gr_1.classList.add('gr')
+  gr_2.classList.add('gr')
+  gr_3.classList.add('gr')
+  social.classList.add('social')
+  social_1.classList.add('social')
+
+  container.classList.add('container')
+  foot.classList.add('foot')
+  left.classList.add('left')
+  right.classList.add('right')
+
+  //
+  about.innerHTML = "О нас"
+  pv.innerHTML = "Пункт выдачи"
+  vkn.innerHTML = "Вакансии"
+  user.innerHTML = "Пользователям"
+  contact.innerHTML = "Связаться с нами"
+  qa.innerHTML = "вопрос-ответ"
+  for_pr.innerHTML = "Для предпринимателей"
+  sell.innerHTML = "Продавайте на Uzum"
+  for_sell.innerHTML = "Вход для продавца"
+  instl.innerHTML = "Скачать приложение"
+  app_st_img.src = "/icons/free-icon-apple-logo-747.png"
+  google_img.src = "/icons/free-icon-google-play-888857.png"
+  soc_p.innerHTML = "Uzum в соцсетях"
+  inst_img.src = "/icons/free-icon-instagram-2111463.png"
+  tg_img.src = "/icons/free-icon-telegram-3488463.png"
+  youtube_img.src = "/icons/free-icon-youtube-1384060.png"
+  fcbook_img.src = "/icons/free-icon-facebook-3955013.png"
+
+  sogl.innerHTML = "Соглашение о конфиденциальности"
+  sogll.innerHTML = "Пользовательское соглашение"
+  right_a.innerHTML = "«2024© ООО «UZUM MARKET». ИНН 309376127. Все права защищены»"
+
+  //appending
+  footer.append(grid, container)
+  grid.append(cont_disp)
+  cont_disp.append(gr, gr_1, gr_2, gr_3)
+  gr.append(about, pv, vkn)
+  gr_1.append(user, contact, qa)
+  gr_2.append(for_pr, sell, for_sell)
+  gr_3.append(social, social_1)
+  social.append(instl, app_st, "App Store", google, "Google play")
+  app_st.append(app_st_img)
+  google.append(google_img)
+  social_1.append(soc_p, inst, tg, youtube, fcbook)
+  inst.append(inst_img)
+  tg.append(tg_img)
+  youtube.append(youtube_img)
+  fcbook.append(fcbook_img)
+  container.append(hr, foot)
+  foot.append(left, right)
+  left.append(sogl, sogll)
+  right.append(right_a)
+
+  place.append(footer)
 }
