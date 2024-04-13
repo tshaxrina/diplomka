@@ -126,6 +126,9 @@ export function createHeader(place) {
   let nosubmit = document.createElement('form')
   let nosubmit_inp = document.createElement('input')
 
+  nosubmit_inp.setAttribute('id', 'search')
+  nosubmit_inp.setAttribute('placeholder', "Искать товары и категории")
+  nosubmit_inp.setAttribute('type', 'search')
   let links = document.createElement('div')
   let name_a = document.createElement('a')
   let name_p = document.createElement('p')
