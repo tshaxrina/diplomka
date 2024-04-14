@@ -325,3 +325,28 @@ footer {
     position: relative;
 }
 
+.spisok {
+    transition: all ease 500ms;
+    .hide{
+        display: none;
+    }
+}
+.spisok {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    width: 37%;
+    min-height: 100px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 1000;
+    inset: 110px 0px 0px 46.5%;
+    translate: -50% 0%;
+    box-shadow: 0px 0px 5px grey;
+    padding: 5px 0px;
+    max-height: 400px;
+    overflow-y: scroll;
+    transition: .5s ease;
+ }

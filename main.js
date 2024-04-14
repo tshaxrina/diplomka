@@ -1,25 +1,23 @@
-import { reload, createHeader, createFooter } from "./modules/helpers";
+import { reload, createHeader, createFooter} from "./modules/helpers";
 import { getData } from "./modules/http";
 
 let cont = document.querySelector('.wrap .container')
+
 let body = document.body
-let inp_search = document.querySelector('#search')
-let goods = JSON.parse(localStorage.getItem("goods")) || null
+let goods = []
 
 getData("/goods?id").then((res) => {
 	if (res.status === 200 || res.status === 201) {
 		reload(res.data, cont);
+		goods = res.data
 	}
 });
-// fetch("db.json")
-//     .then(res => res.json())
-//     .then(res => {
-//         reload(res, cont)
-// 	})
 createHeader(body)
 createFooter(body)
+let nosubmit_inp = document.querySelector('#search')
 
-inp_search.onkeyup = (event) => {
+
+nosubmit_inp.onkeyup = (event) => {
     const keyword = event.target.value.toUpperCase().trim()
 
     const filtered = goods.filter (res => {
@@ -30,3 +28,4 @@ inp_search.onkeyup = (event) => {
     })
     reload(filtered, cont)
 }
+

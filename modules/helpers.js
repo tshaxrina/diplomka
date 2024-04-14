@@ -54,7 +54,13 @@ export function reload(arr, place) {
       b_basket.append(basket_img)
       place.append(item)
 
-      // black_fr = res.data.filter((item) => item.isBlackFriday == true);
+      itop_img.onclick = () => {
+        
+      };
+      i_name.onclick = () => {
+        
+        
+      };
     }
   }
 
@@ -125,6 +131,7 @@ export function createHeader(place) {
   let search = document.createElement('div')
   let nosubmit = document.createElement('form')
   let nosubmit_inp = document.createElement('input')
+
 
   nosubmit_inp.setAttribute('id', 'search')
   nosubmit_inp.setAttribute('placeholder', "Искать товары и категории")
@@ -217,6 +224,7 @@ export function createHeader(place) {
 
   header.append(header_top, header_main, header_bottom)
   place.prepend(header)
+
 } 
 
 export function createFooter(place) {

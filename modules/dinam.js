@@ -1,4 +1,15 @@
-export function createDinam(products) {
+import { getData } from "./http"
+
+let cont = document.querySelector('main')
+
+getData("/goods?id").then((res) => {
+	if (res.status === 200 || res.status === 201) {
+		createDinam(res.data, cont)
+	}
+});
+
+ function createDinam(products, place) {
+    place.innerHTML = ''
  for (let product of products) {
     let container = document.createElement("div")
     let tovar = document.createElement("section")
@@ -40,8 +51,8 @@ export function createDinam(products) {
     pr.classList.add('products')
 
     //
-    left_img.src = "/icons/oil.jpg"
-    name_pr.innerHTML = "Масло"
+    left_img.src = product.media[0]
+    name_pr.innerHTML = product.title
     price_pr.innerHTML = "30 000 сум"
     pls.innerHTML = "+"
     mns.innerHTML = "-"
@@ -67,5 +78,6 @@ export function createDinam(products) {
     btns.append(add_bask, add_fav)
     description.append(about, about_p)
     pr.append(pr_h3)
+    place.append(container)
  }
 }
