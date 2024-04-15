@@ -1,4 +1,7 @@
-import { getData } from "./http"
+import { getData } from "./http";
+import { createHeader, createFooter } from "./helpers";
+
+let body = document.body
 
 let cont = document.querySelector('main')
 
@@ -7,6 +10,9 @@ getData("/goods?id").then((res) => {
 		createDinam(res.data, cont)
 	}
 });
+
+createHeader(body)
+createFooter(body)
 
  function createDinam(products, place) {
     place.innerHTML = ''
@@ -24,7 +30,8 @@ getData("/goods?id").then((res) => {
     let num = document.createElement("p")
     let color = document.createElement("div")
     let color_p = document.createElement("p")
-    let color_btn = document.createElement("button")
+
+    let colorBtn = document.createElement("div")
     let type = document.createElement("p")
     let type_span = document.createElement("span")
     let btns = document.createElement("div")
@@ -36,11 +43,12 @@ getData("/goods?id").then((res) => {
     let pr = document.createElement("section")
     let pr_h3 = document.createElement("h3")
 
+
     //styling
     container.classList.add('container')
     tovar.classList.add('tovar')
-    left.classList.add('left')
-    right.classList.add('right')
+    left.classList.add('left_pr')
+    right.classList.add('right_pr')
     amount.classList.add('amount')
     color.classList.add('color')
     type.classList.add('type')
@@ -53,18 +61,17 @@ getData("/goods?id").then((res) => {
     //
     left_img.src = product.media[0]
     name_pr.innerHTML = product.title
-    price_pr.innerHTML = "30 000 сум"
+    price_pr.innerHTML = product.price
     pls.innerHTML = "+"
     mns.innerHTML = "-"
     num.innerHTML = "1"
     color_p.innerHTML = "Color:"
-    color_btn.innerHTML = "White"
     type.innerHTML = "Type: "
-    type_span.innerHTML = "furniture"
+    type_span.innerHTML = product.type
     add_bask.innerHTML = "Добавить в корзину"
     add_fav.innerHTML = "Добавить в избранное"
     about.innerHTML = "Описание товара"
-    about_p.innerHTML = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa voluptatem rerum dolores deserunt? Quas delectus dicta, hic dignissimos non, voluptatibus, consectetur omnis molestiae veritatis ipsam impedit? Quod, reiciendis odit facere dolorem optio quidem. Impedit, dolorem? Voluptatibus aliquid sunt, illum a distinctio animi atque est! Sit repellendus nemo voluptas exercitationem laudantium."
+    about_p.innerHTML = product.description
     pr_h3.innerHTML = "Похожие товары"
 
     //appending
@@ -73,11 +80,18 @@ getData("/goods?id").then((res) => {
     left.append(left_img)
     right.append(name_pr, price_pr, amount, color, type, btns)
     amount.append(pls, num, mns)
-    color.append(color_p, color_btn)
+    color.append(color_p, colorBtn )
     type.append(type_span)
     btns.append(add_bask, add_fav)
     description.append(about, about_p)
     pr.append(pr_h3)
     place.append(container)
+    
+
+    for (let color of product.colors) {
+      let color_btn = document.createElement("button")
+      color_btn.innerHTML = color
+      colorBtn.append(color_btn)
+    }
  }
 }

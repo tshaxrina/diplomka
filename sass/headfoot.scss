@@ -1,0 +1,241 @@
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: myFont;
+}
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  form {
+    color: #E2EAF1;
+    display: flex;
+    padding: 0px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    margin: 0 0 0px;
+  }
+  
+  input[type="search"] {
+    border: none;
+    background: transparent;
+    margin: 0px;
+    padding: 0px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  
+  input[type="search"]::placeholder {
+    color: #A6C5E2;
+  }
+  input[type="search"]:focus {
+    box-shadow: 0 0 3px 0 #1183d6;
+    border-color: #1183d6;
+    outline: none;
+    color: #000;
+  }
+  
+  form.nosubmit {
+   border: none;
+   padding: 0;
+  }
+  
+  input.nosubmit {
+    border: 1px solid #E2EAF1;
+    width: 450px;
+    padding: 9px 4px 9px 40px;
+     background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+  }
+  .header_top {
+    align-items: center;
+    background-color: #f4f5f5;
+    display: flex;
+    justify-content: stretch;
+    min-height: 32px;
+    width: 100%;
+    padding-left: 90px;
+    padding-right: 80px;
+    font-family: myFont;
+}
+.header_top div {
+display: flex;
+gap: 15px;
+}
+  .catalog button{
+    background-color: #EAEAF9;
+    color: #3333CC;
+    border-width: 0px;
+    border-radius: 4px;
+    width: 80px;
+    height: 32px;
+  }
+  .header {
+    height: 84px;
+    // // padding: 26px 120px;
+    // gap: 15px;
+    align-items: center;
+    display: flex;
+    justify-content: stretch;
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 80px;
+    font-family: myFont;
+  }
+  .links {
+    display: flex;
+    gap: 20px;
+    
+    & a {
+display: flex;
+font-size: 17px;
+text-decoration: none;
+color: black;
+align-items: center;
+gap: 5px;
+        & img {
+            height: 16px;
+            width: 15px;
+        }
+    }
+  }
+  .right h3 {
+    font-weight: 500;
+    & span {
+        text-decoration: underline;
+    }
+}
+.grey {
+    color: #555;
+}
+.blue {
+    color: #3333CC;
+}
+.left a {
+    align-items: center;
+    background: 0 0;
+    border: none;
+    color: #414243;
+    display: flex;
+    font-size: 14px;
+    font-weight: 500;
+    max-height: 32px;
+    padding: 0 12px 0 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.header_bottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 38px;
+    justify-content: space-between;
+    margin: 10px -10px;
+    position: relative;
+    width: 100%;
+    & img {
+            height: 24px;
+        width: 24px;
+        margin-right: 4px;
+    }
+    & .a {
+        margin-left: 0px;
+    }
+}
+.header_bottom a {
+    text-decoration: none;
+    color: darkgray;
+}
+
+.item img {
+    width: 300px;
+    border-radius: 25px;
+}
+.item a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.wrap {
+    max-width: 1240px;
+    min-width: 320px;
+    /* width: 100%; */
+    margin: 0 auto;
+    & .container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+}
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+.display {
+    display: flex;
+}
+main {
+    & .block img{
+    width: 1200px;
+    height: 474px;
+    background-color: #5200BA;
+    border-radius: 30px;
+    }
+}
+footer {
+    height: 250px;
+    padding-top: 20px;
+}
+.grid {
+   text-align: left;
+    & .gr {
+        text-align: left;
+        display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+    }
+    & a {
+        padding: 10px 0px;
+        text-decoration: none;
+        color: darkgray;
+    }
+}
+.social {
+    margin-bottom: 60px;
+    margin-left: 0px;
+    gap: 5px;
+    & p {
+        margin-bottom: 10px;
+    } 
+}
+footer {
+    & hr {
+        color: darkgray;
+    }
+    & .foot {
+        align-items: center;
+        height: 30px;
+        display: flex;
+        & .left {
+            display: flex;
+            gap: 15px;
+            margin-left: 3px;
+        }
+        & .right {
+            margin-right: 5px;
+        }
+        & a {
+            text-decoration: none;
+            color: darkgray;
+            font-size: 10px;
+        }
+    }
+}
+.grey {
+    color: darkgray;
+}

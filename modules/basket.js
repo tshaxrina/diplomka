@@ -1,4 +1,21 @@
-export function baskets(basks) {
+import { getData } from "./http";
+import { createHeader, createFooter } from "./helpers";
+
+let body = document.body
+
+let cont = document.querySelector('.flex')
+
+getData("/goods?id").then((res) => {
+	if (res.status === 200 || res.status === 201) {
+		baskets(res.data, cont)
+	}
+});
+
+createHeader(body)
+createFooter(body)
+
+function baskets(basks, place) {
+    place.innerHTML = ''
     for (let item of basks) {
         //creating
         let product = document.createElement('div')
@@ -20,6 +37,7 @@ export function baskets(basks) {
         let price_p = document.createElement('p')
 
         //styling
+        pr_inp.setAttribute('type', 'checkbox')
         product.classList.add('product')
         product_left.classList.add('product_left')
         product_right.classList.add('product_right')
@@ -28,17 +46,17 @@ export function baskets(basks) {
         price.classList.add('price')
 
         //
-        pr_img.src = "/icons/oil.jpg"
-        pr_name.innerHTML = "Масло"
+        pr_img.src = item.media
+        pr_name.innerHTML = item.title
         type.innerHTML = "type:"
-        type_span.innerHTML = "furniture"
+        type_span.innerHTML = item.type
         color.innerHTML = "color:"
         color_span.innerHTML = "black"
         pls.innerHTML = "+"
         mns.innerHTML = "-"
         num.innerHTML = 1
         remove.innerHTML = 'Удалить'
-        price_p.innerHTML = "25 000 сум"
+        price_p.innerHTML = item.price
 
         //appending
         product.append(product_left, product_right)
@@ -48,5 +66,12 @@ export function baskets(basks) {
         color.append(color_span)
         amount.append(pls, num, mns)
         price.append(price_p)
+        place.append(product)
     }
 }
+
+let count_pr = document.querySelector('.count_pr')
+let f_price = document.querySelector('.f_price')
+let final_price = document.querySelector('.final_price')
+let econom = document.querySelector('.econom')
+let go = document.querySelector('.go')

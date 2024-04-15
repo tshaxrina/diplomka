@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Korzina</title>
     <link rel="stylesheet" href="/sass/korzina.scss">
+    <link rel="stylesheet" href="/sass/headfoot.scss">
 </head>
 <body>
     <section>
@@ -38,10 +39,10 @@
            <div class="l">
            <div class="calculator">
             <h4>Ваш заказ</h4>
-            <p>Итого товаров (<span>26</span>): <span>214 000 сумов</span></p>
+            <p>Итого товаров (<span class="count_pr">26</span>): <span class="f_price">214 000 сумов</span></p>
             <button class="tomorrow">Доставка (Завтра)</button>
             <p>Итого: <span class="final_price">114 000 сумов</span></p>
-            <a href="">Вы экономите <span>97 000 сум</span></a> <br>
+            <a href="">Вы экономите <span class="econom">97 000 сум</span></a> <br>
             <button class="go">Перейти к оформлению</button>
            </div>
            <div class="delivery">
@@ -51,5 +52,6 @@
            </div></div>
         </div>
     </section>
+    <script type="module" src="/modules/basket.js"></script>
 </body>
 </html>
