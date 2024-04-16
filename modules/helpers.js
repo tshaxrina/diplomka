@@ -1,3 +1,5 @@
+
+
 export function reload(arr, place) {
   place.innerHTML = ""
     for (let i of arr) {
@@ -33,6 +35,7 @@ export function reload(arr, place) {
       new_price.classList.add('new_price')
   
       //
+      i_name.href = "/pages/dinam/?id=${i.id}"
       itop_img.src = i.media[0]
       b_img.src = "/icons/free-icon-heart-3502230.png"
       black_fr.innerHTML = "Акция"
@@ -54,16 +57,37 @@ export function reload(arr, place) {
       b_basket.append(basket_img)
       place.append(item)
 
-      itop_img.onclick = () => {
-        
-      };
-      i_name.onclick = () => {
-        
-        
-      };
+
+      b_heart.onclick = () => {
+
+        if(fav.includes(i.id)) {
+          let idx = fav.indexOf(i.id)
+          fav.splice(idx, 1)
+
+          b_img.classList.remove('bbb')
+          b_img.src = "/icons/free-icon-heart-3502230.png"
+      } else {
+          fav.push(i.id)
+          b_img.classList.add('bbb')
+          b_img.src = "/icons/Vector.png"
+          
+      }
+      if (buttonAdd.classList.contains('active')) {
+          reload(fav)
+      } 
+    }
+
+      b_basket.onclick = () => {
+        alert("Товар добавлен в корзину!")
+      }
+
+      itop_img.onclick = (event) => {
+        event.preventDefault();
+       
+      location.href = `/pages/dinam/?id=${i.id}`
+      }
     }
   }
-
 
 export function createHeader(place) {
   //creating
@@ -75,7 +99,48 @@ export function createHeader(place) {
   let right_a = document.createElement('a')
   let right_a_img = document.createElement('a')
   let loc = document.createElement('h3')
-  let loc_span = document.createElement('span')
+  // let loc_span = document.createElement('span')
+  let loc_span = document.createElement('select')
+  let samarkand = document.createElement('option')
+  let tashkent = document.createElement('option')
+  let navoi = document.createElement('option')
+  let termez = document.createElement('option')
+  let jizzax = document.createElement('option')
+  let namangan = document.createElement('option')
+  let buxoro = document.createElement('option')
+  let fargona = document.createElement('option')
+  let andijon = document.createElement('option')
+  let karshi = document.createElement('option')
+  let xorezm = document.createElement('option')
+  let sirdaryo = document.createElement('option')
+
+  samarkand.value = "Самарканд"
+  tashkent.value = "Ташкент"
+  sirdaryo.value = "Сырдарья"
+  namangan.value = "Наманган"
+  buxoro.value = "Бухоро"
+  xorezm.value = "Хоразм"
+  karshi.value = "Карши"
+  andijon.value = "Андижон"
+  fargona.value = "Фаргона"
+  jizzax.value = "Джиззах"
+  termez.value = "Термез"
+  navoi.value = "Навои"
+
+  samarkand.innerHTML = "Самарканд"
+  tashkent.innerHTML = "Ташкент"
+  sirdaryo.innerHTML = "Сырдарья"
+  namangan.innerHTML = "Наманган"
+  buxoro.innerHTML = "Бухоро"
+  xorezm.innerHTML = "Хоразм"
+  karshi.innerHTML = "Карши"
+  andijon.innerHTML = "Андижон"
+  fargona.innerHTML = "Фаргона"
+  jizzax.innerHTML = "Джиззах"
+  termez.innerHTML = "Термез"
+  navoi.innerHTML = "Навои"
+
+
   let punkt = document.createElement('h3')
 
   let center = document.createElement('div')
@@ -96,12 +161,13 @@ export function createHeader(place) {
   center.classList.add('center')
   grey.classList.add('grey')
   blue.classList.add('blue')
-  left.classList.add('left')
+  left.classList.add('left') 
+  loc_span.classList.add('loc_span')
 
   //
   right_a_img.src = "/icons/free-icon-position-3249692.png"
   loc.innerHTML = "Город:"
-  loc_span.innerHTML = "Ташкент"
+  // loc_span.innerHTML = "Ташкент"
   punkt.innerHTML = "Пункт выдачи"
   grey.innerHTML = "Доставим ваш заказ бесплатно - всего за 1 день!"
   blue.innerHTML = "Продавайте на Uzum"
@@ -116,6 +182,7 @@ export function createHeader(place) {
   right.append(right_a, loc, punkt)
   right_a.append(right_a_img)
   loc.append(loc_span)
+  loc_span.append(samarkand, tashkent, namangan, fargona, jizzax, buxoro, xorezm, karshi, sirdaryo, andijon, termez, navoi)
   center.append(grey)
   left.append(q_a, my_order,lang)
   lang.append(lang_img, lang_p)
@@ -160,6 +227,7 @@ export function createHeader(place) {
 
   //
   logo_img.src = "/icons/uzum.png"
+  logo_a.href = "/index.html"
   catalog_btn.innerHTML = "Каталог"
   name_p.innerHTML = "Шахрина"
   name_img.src = "/icons/free-icon-avatar-6386976.png"
@@ -167,6 +235,8 @@ export function createHeader(place) {
   fav_img.src = "/icons/free-icon-heart-3502230.png"
   bask_p.innerHTML = "Корзина"
   bask_img.src = "/icons/free-icon-shopping-bag-4903482.png"
+  bask_a.href = "/pages/korzina/"
+  fav_a.href = "/pages/favorite/"
 
   //appending
   header_main.append(cont_disp)
@@ -216,6 +286,7 @@ export function createHeader(place) {
   homes.innerHTML = "Товары для дома"
   repair.innerHTML = "Строительство и ремонт"
   more.innerHTML = "Ещё"
+ 
 
   //appending
   header_bottom.append(cont_disp_2)

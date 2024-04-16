@@ -20,6 +20,7 @@
 .product {
     display: flex;
     gap: 10px;
+    margin-bottom: 10px;
 }
 .calculator {
     width: 418px;
@@ -36,18 +37,19 @@
 }
 .amount {
     display: flex;
-    border-width: 5px;
+    border-width: 1px;
     border-color: black;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 40px;
+    width: 43px;
     margin-left: 0px;
-    align-items: center;
+    align-items: baseline;
     padding: 0px;
+    background-color: rgb(169, 168, 168);
 }
 .amount button {
     border-width: 0px;
-    background-color: white;
+    background-color: rgb(169, 168, 168);
 }
 .product_right a{
     text-decoration: none;

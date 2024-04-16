@@ -2,14 +2,17 @@ import { getData } from "./http";
 import { createHeader, createFooter } from "./helpers";
 
 let body = document.body
-
 let cont = document.querySelector('main')
+const good_id = location.search.split('=').at(-1)
+console.log(good_id);
 
-getData("/goods?id").then((res) => {
-	if (res.status === 200 || res.status === 201) {
-		createDinam(res.data, cont)
-	}
-});
+getData(`/goods/` + good_id)
+.then((res) => {
+   if (res.status === 200 || res.status === 201) {
+      createDinam(res.data, cont)
+}
+})
+
 
 createHeader(body)
 createFooter(body)
@@ -59,19 +62,19 @@ createFooter(body)
     pr.classList.add('products')
 
     //
-    left_img.src = product.media[0]
-    name_pr.innerHTML = product.title
-    price_pr.innerHTML = product.price
+    left_img.src = `${product.media}`
+    name_pr.innerHTML = `${product.title}`
+    price_pr.innerHTML = `${product.price}` + " сум"
     pls.innerHTML = "+"
     mns.innerHTML = "-"
     num.innerHTML = "1"
     color_p.innerHTML = "Color:"
     type.innerHTML = "Type: "
-    type_span.innerHTML = product.type
+    type_span.innerHTML = `${product.type}`
     add_bask.innerHTML = "Добавить в корзину"
     add_fav.innerHTML = "Добавить в избранное"
     about.innerHTML = "Описание товара"
-    about_p.innerHTML = product.description
+    about_p.innerHTML = `${product.description}`
     pr_h3.innerHTML = "Похожие товары"
 
     //appending
@@ -93,5 +96,23 @@ createFooter(body)
       color_btn.innerHTML = color
       colorBtn.append(color_btn)
     }
+
+//     pls.onclick = () => {
+//       num.innerHTML++
+//       price.innerHTML = +(item.price * num.innerHTML).toFixed(2) + " сум"
+//       pr_ed.innerHTML = item.price + "ед/сум"
+//   total = +(total + item.price).toFixed(2) + " сум"
+// }
+// mns.onclick = () => {
+//   if (num.innerHTML > 0) {
+//       console.log("inoon");
+//       num.innerHTML--
+//       price.innerHTML = +(item.price * num.innerHTML).toFixed(2) + " сум"
+//   }
+//   if (num.innerHTML === 1) {
+//       pr_ed.innerHTML = ""
+//   }
+//   total = +(total - item.price).toFixed(2) + " сум"
+// }
  }
 }

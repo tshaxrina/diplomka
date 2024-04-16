@@ -6,14 +6,23 @@ let cont = document.querySelector('.wrap .container')
 let body = document.body
 let goods = []
 
+
+let furniture = []
+let TV = []
+let PC = []
+let audio = []
+let kitchen = []
+
 getData("/goods?id").then((res) => {
 	if (res.status === 200 || res.status === 201) {
 		reload(res.data, cont);
 		goods = res.data
+        massiv(goods)
 	}
 });
 createHeader(body)
 createFooter(body)
+
 let nosubmit_inp = document.querySelector('#search')
 
 
@@ -28,4 +37,26 @@ nosubmit_inp.onkeyup = (event) => {
     })
     reload(filtered, cont)
 }
+
+function massiv(arr) {
+    for (let item of arr) {
+        if (item.type == "furniture") {
+            furniture.push(item)
+        }
+        if (item.type == "TV") {
+            TV.push(item)
+        }
+        if (item.type == "PC") {
+            PC.push(item)
+        }
+        if (item.type == "audio") {
+            audio.push(item)
+        }
+        if (item.type == "kitchen") {
+            kitchen.push(item)
+        }
+    }
+}
+
+
 

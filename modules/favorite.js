@@ -3,17 +3,52 @@ import { createHeader, createFooter } from "./helpers";
 
 let body = document.body
 let cont = document.querySelector('.wrap .container')
+let goods = []
+let fav_btn = document.querySelector('.b_basket')
+let favorites = [];
 
-getData("/goods?id").then((res) => {
+getData(`/goods?id`).then((res) => {
 	if (res.status === 200 || res.status === 201) {
-		reload(res.data, cont)
+		// favreload(res.data, cont)
+        goods = res.data
+        
+        
+        fav_btn.onclick = () => {
+            if (favorite.classList.contains("danger")) {
+                    favorite.classList.remove("danger");
+                    favorite.innerHTML = "Добавить в избранное";
+                    favorites = favorites.filter((el) => el !== item.id);
+                    localStorage.setItem("liked", JSON.stringify(favorites));
+            } else {
+                    favorite.classList.add("danger");
+                    favorite.innerHTML = "Удалить из избранного";
+                    favorites.push(item.id);
+                    localStorage.setItem("liked", JSON.stringify(favorites));
+            }
+    };
 	}
 });
 
 createHeader(body)
 createFooter(body)
 
-function reload(arr, place) {
+let nosubmit_inp = document.querySelector('#search')
+
+
+nosubmit_inp.onkeyup = (event) => {
+    const keyword = event.target.value.toUpperCase().trim()
+
+    const filtered = goods.filter (res => {
+        let title = res.title.toUpperCase().trim()
+        if(title.includes(keyword)) {
+            return res
+        }
+    })
+    favreload(filtered, cont)
+}
+
+
+export function favreload(arr, place) {
     place.innerHTML = ""
       for (let i of arr) {
         //creating
@@ -55,8 +90,8 @@ function reload(arr, place) {
         star.src = "/icons/free-icon-star-8358826.png"
         i_rating.innerHTML = i.rating
         month.innerHTML = "1462 сум/мес"
-        old_price.innerHTML = i.price
-        new_price.innerHTML = i.price
+        old_price.innerHTML = i.price + " сум"
+        new_price.innerHTML = i.price + " сум"
         basket_img.src = "/icons/free-icon-shopping-bag-4903482.png"
   
         //appending
@@ -76,5 +111,17 @@ function reload(arr, place) {
           
           
         };
+        b_basket.onclick = () => {
+            alert("Товар добавлен в корзину!")
+          }
+        b_heart.onclick = () => {
+            let idx = arr.indexOf(item.id)
+            arr.splice(idx, 1)
+            item.remove()
+            // reload(goods)
+        }
+          
+        
       }
     }
+
