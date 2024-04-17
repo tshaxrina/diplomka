@@ -1,7 +1,5 @@
-
-
 export function reload(arr, place) {
-  place.innerHTML = ""
+  place.innerHTML = ''
     for (let i of arr) {
       //creating
       let item = document.createElement('div')
@@ -85,7 +83,7 @@ export function reload(arr, place) {
         event.preventDefault();
        
       location.href = `/pages/dinam/?id=${i.id}`
-      }
+      }      
     }
   }
 
