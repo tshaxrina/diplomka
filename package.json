@@ -13,6 +13,7 @@
     "concurrently": "^8.2.2",
     "json-server": "^1.0.0-alpha.23",
     "sass": "^1.72.0",
+    "swiper": "^11.1.1",
     "vite": "^5.0.8"
   },
   "main": "main.js",

@@ -1,3 +1,7 @@
+
+let fav = []
+export let cart = JSON.parse(localStorage.getItem("liked")) || [];
+
 export function reload(arr, place) {
   place.innerHTML = ''
     for (let i of arr) {
@@ -70,13 +74,32 @@ export function reload(arr, place) {
           b_img.src = "/icons/Vector.png"
           
       }
-      if (buttonAdd.classList.contains('active')) {
-          reload(fav)
-      } 
+      // if (b_img.classList.contains('bbb')) {
+      //     reload(fav)
+      // } 
     }
 
       b_basket.onclick = () => {
-        alert("Товар добавлен в корзину!")
+        
+          if (cart.includes(i.id)) {
+              // delete
+              let idx = cart.indexOf(i.id)
+              cart.splice(idx, 1)
+              alert("Удален из корзины!")
+              localStorage.setItem("liked", JSON.stringify(cart));
+          } else {
+              alert("Товар добавлен в корзину!")
+              cart.push(i)
+              localStorage.setItem("liked", JSON.stringify(cart));
+          }
+
+          if (toCartId.includes(item.id)) {
+            toCartId = toCartId.filter((el) => el !== item.id);
+            localStorage.setItem("liked", JSON.stringify(toCartId));
+          } else {
+            toCartId.push(item.id);
+            
+          }
       }
 
       itop_img.onclick = (event) => {
@@ -225,7 +248,7 @@ export function createHeader(place) {
 
   //
   logo_img.src = "/icons/uzum.png"
-  logo_a.href = "/index.html"
+  logo_a.href = "/"
   catalog_btn.innerHTML = "Каталог"
   name_p.innerHTML = "Шахрина"
   name_img.src = "/icons/free-icon-avatar-6386976.png"
@@ -403,3 +426,4 @@ export function createFooter(place) {
 
   place.append(footer)
 }
+

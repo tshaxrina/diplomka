@@ -1,18 +1,24 @@
-import { getData } from "./http";
+import { getData, patchData, postData } from "./http";
 import { createHeader, createFooter } from "./helpers";
 import { reload } from "./helpers";
+import { cart } from "./helpers";
 
 let body = document.body
 
 let cont = document.querySelector('.flex')
 let goods = []
 
-getData("/goods?id").then((res) => {
-	if (res.status === 200 || res.status === 201) {
-		baskets(res.data, cont)
-        goods = res.data
-	}
+postData(cart).then((res) => {
+    baskets(res, cont)
 });
+
+getData(cart).then((res) => {
+	// if (res.status === 200 || res.status === 201) {
+		baskets(res, cont)
+        goods = res
+	// }
+});
+
 
 createHeader(body)
 createFooter(body)
@@ -36,8 +42,16 @@ nosubmit_inp.onkeyup = (event) => {
     baskets(filtered, cont)
 }
 
-function baskets(basks, place) {
+
+
+export function baskets(basks, place) {
     place.innerHTML = ''
+    if (arr.lengh === 0) {
+        place.innerHTML = `
+        <img src="/public/images/shopocat 1.png" alt="">
+        <h2>В корзине пока нет товаров</h2>
+        <a href="/">Начните с подборок на главной странице или найдите нужный товар через поиск</a>` 
+    }
     for (let item of basks) {
         //creating
         let product = document.createElement('div')
@@ -112,10 +126,10 @@ function baskets(basks, place) {
             total = +(total - item.price).toFixed(2) + " сум"
         }
         remove.onclick = () => {
-            let idx = goods.indexOf(item.id)
-            goods.splice(idx, 1)
+            let idx = basks.indexOf(item.id)
+            basks.splice(idx, 1)
             product.remove()
-            reload(goods)
+            baskets(basks)
         }
     }
 }

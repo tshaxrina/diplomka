@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { isError } from 'lodash'
 const base = import.meta.env.VITE_BASE_URL
 
 export const getData = async(path) => {
@@ -14,7 +15,7 @@ export const postData = async(path, body) => {
         const res = await axios.post(base + path, body)
         return res
     } catch (e) {
-        alert('Network error')
+        alert(isError)
     }
 }
 export const patchData = async(path, body) => {
@@ -33,3 +34,20 @@ export const patchData = async(path, body) => {
 //         alert('Network error')
 //     }
 // }
+
+export class MakeRequest {
+    baseURL = import.meta.env.VITE_BASE_URL
+
+
+    async getData(path) {
+        try {
+            const res = await axios.get(this.baseURL + path);
+
+            if (res.status === 200 || res.status === 201) {
+                return res.data;
+            }
+        } catch (e) {
+            alert(e.message);
+            return e;
+        }
+    } }

@@ -11,21 +11,6 @@ getData(`/goods?id`).then((res) => {
 	if (res.status === 200 || res.status === 201) {
 		// favreload(res.data, cont)
         goods = res.data
-        
-        
-        fav_btn.onclick = () => {
-            if (favorite.classList.contains("danger")) {
-                    favorite.classList.remove("danger");
-                    favorite.innerHTML = "Добавить в избранное";
-                    favorites = favorites.filter((el) => el !== item.id);
-                    localStorage.setItem("liked", JSON.stringify(favorites));
-            } else {
-                    favorite.classList.add("danger");
-                    favorite.innerHTML = "Удалить из избранного";
-                    favorites.push(item.id);
-                    localStorage.setItem("liked", JSON.stringify(favorites));
-            }
-    };
 	}
 });
 
@@ -50,6 +35,12 @@ nosubmit_inp.onkeyup = (event) => {
 
 export function favreload(arr, place) {
     place.innerHTML = ""
+        if (arr.lengh === 0) {
+            place.innerHTML = `
+            <img src="/public/images/hearts 1.png" alt="">
+            <h2>Добавьте то, что понравилось</h2>
+            <a href="/">Перейдите на главную страницу и нажмите на ♡ в товаре</a>` 
+        }
       for (let i of arr) {
         //creating
         let item = document.createElement('div')
@@ -120,7 +111,6 @@ export function favreload(arr, place) {
             item.remove()
             // reload(goods)
         }
-          
         
       }
     }

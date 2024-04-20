@@ -1,8 +1,14 @@
 import { reload, createHeader, createFooter} from "./modules/helpers";
 import { getData } from "./modules/http";
+import { reload_slides} from "./modules/ui";
+import { MakeRequest } from "./modules/http";
+import Swiper from "swiper/bundle";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 let cont = document.querySelector('.wrap .container')
-const swiper_wrapper = document.querySelector('.swiper-wrapper');
+
 
 let body = document.body
 let goods = []
@@ -15,30 +21,15 @@ let audio = []
 let kitchen = []
 
 getData("/goods?id").then((res) => {
-	if (res.status === 200 || res.status === 201) {
-		reload(res.data, cont);
-		goods = res.data
+  if (res.status === 200 || res.status === 201) {
+    reload(res.data, cont);
+    goods = res.data
         massiv(goods)
 
         reload_slides(res.data.slice(0, 10), swiper_wrapper);
 
-        new Swiper(".mySwiper", {
-          spaceBetween: 30,
-          centeredSlides: true,
-          autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-          },
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-          },
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-        });
-	}
+       
+  }
 });
 createHeader(body)
 createFooter(body)
@@ -79,50 +70,28 @@ function massiv(arr) {
 }
 
 
-// const swiper_wrapper = document.querySelector('.swiper-wrapper');
-// const helpers = new MakeRequest();helpers.getData('/goods')
-//   .then(res => {
-//     reload_slides(res.slice(0, 10), swiper_wrapper);
+const swiper_wrapper = document.querySelector('.swiper-wrapper');
+const helpers = new MakeRequest();
+helpers.getData('/goods')
+  .then(res => {
+    reload_slides(res.slice(0, 10), swiper_wrapper);
 
-//     new Swiper(".mySwiper", {
-//       spaceBetween: 30,
-//       centeredSlides: true,
-//       autoplay: {
-//         delay: 2500,
-//         disableOnInteraction: false,
-//       },
-//       pagination: {
-//         el: ".swiper-pagination",
-//         clickable: true,
-//       },
-//       navigation: {
-//         nextEl: ".swiper-button-next",
-//         prevEl: ".swiper-button-prev",
-//       },
-//     });
-
-//     reload_goods(res, goods,);
-//   });
+    new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
 
 
-
-     function reload_slides(arr, place) {
-        place.innerHTML = '';
-      
-        for (let item of arr) {
-            place.innerHTML += `
-            <div class="swiper-slide">
-            <div class="text">
-            <h1 class="title_of_product">${item.title}</h1>
-            <h2 class="price">${item.price} сум</h2>
-           <p class="description">${item.description.slice(0, 500)}</p>
-            </div>
-            <div class="yellow">
-            <img src="${item.media[0]}" >
-            </div>
-           </div>
-        `;
-        }
-      }
-
-
+  });
