@@ -91,9 +91,9 @@
     border-width: 0px;
 }
 .add_fav {
-    border-color: blue;
-    background-color: #fff;
-    color: blue;
+    color: white;
+    background-color: blue;
+    border-width: 0px;
 }
 .description {
     width: 850px;
@@ -104,4 +104,16 @@
     width: 1200px;
     margin-top: 30px;
     margin-bottom: 20px;
+}
+.incart {
+    border-width: 1.5px;
+    border-color: blue;
+    background-color: #fff;
+    color: blue;
+}
+.liked {
+    border-width: 1.5px;
+    border-color: blue;
+    background-color: #fff;
+    color: blue;
 }

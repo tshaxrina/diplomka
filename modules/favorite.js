@@ -1,46 +1,43 @@
-import { getData } from "./http";
-import { createHeader, createFooter } from "./helpers";
+import { getData, deleteData } from "./http";
+import { createHeader, createFooter, reload } from "./helpers";
+import { toCartId } from "../main";
 
 let body = document.body
 let cont = document.querySelector('.wrap .container')
+let nothing = document.querySelector('.nothing')
 let goods = []
-let fav_btn = document.querySelector('.b_basket')
-let favorites = [];
 
-getData(`/goods?id`).then((res) => {
-	if (res.status === 200 || res.status === 201) {
-		// favreload(res.data, cont)
-        goods = res.data
-	}
-});
-
-createHeader(body)
-createFooter(body)
+getData('/wishes')
+        .then((res) => {
+            if (res.data.length > 0) {
+                favreload(res.data, cont)
+                goods = res.data
+            } else {
+                nothing.innerHTML += `
+            <img class="nothing_img" src="/public/images/hearts 1.png" alt="">
+            <h2 class="nothing_h2">Добавьте то, что понравилось</h2>
+            <a class="nothing_a" href="/">Перейдите на главную страницу и нажмите на ♡ в товаре</a>` 
+            }
+        })
 
 let nosubmit_inp = document.querySelector('#search')
 
 
-nosubmit_inp.onkeyup = (event) => {
-    const keyword = event.target.value.toUpperCase().trim()
+// nosubmit_inp.onkeyup = (event) => {
+//     const keyword = event.target.value.toUpperCase().trim()
 
-    const filtered = goods.filter (res => {
-        let title = res.title.toUpperCase().trim()
-        if(title.includes(keyword)) {
-            return res
-        }
-    })
-    favreload(filtered, cont)
-}
+//     const filtered = goods.filter(prod => {
+//         let title = prod.title.toUpperCase().trim()
+//         if(title.includes(keyword)) {
+//             return prod
+//         }
+//     })
+//     favreload(filtered, cont)
+// }
 
 
 export function favreload(arr, place) {
     place.innerHTML = ""
-        if (arr.lengh === 0) {
-            place.innerHTML = `
-            <img src="/public/images/hearts 1.png" alt="">
-            <h2>Добавьте то, что понравилось</h2>
-            <a href="/">Перейдите на главную страницу и нажмите на ♡ в товаре</a>` 
-        }
       for (let i of arr) {
         //creating
         let item = document.createElement('div')
@@ -74,16 +71,19 @@ export function favreload(arr, place) {
         new_price.classList.add('new_price')
     
         //
-        itop_img.src = i.media[0]
+        i_name.href = `/pages/dinam/?id=${i.product.id}`
+        itop_img.src = i.product.media[0]
         b_img.src = "/icons/Vector.png"
         black_fr.innerHTML = "Акция"
-        i_name.innerHTML = i.title
+        i_name.innerHTML = i.product.title
         star.src = "/icons/free-icon-star-8358826.png"
-        i_rating.innerHTML = i.rating
-        month.innerHTML = "1462 сум/мес"
-        old_price.innerHTML = i.price + " сум"
-        new_price.innerHTML = i.price + " сум"
+        i_rating.innerHTML = i.product.rating
         basket_img.src = "/icons/free-icon-shopping-bag-4903482.png"
+        month.innerHTML = Number(Math.round(i.product.price/12).toFixed()).toLocaleString() + ' сум/мес'
+      old_price.innerHTML = Number(i.product.price.toFixed()).toLocaleString() + ' сум'
+      let aksia = Math.round((i.product.price * i.product.salePercentage)/100)
+      new_price.innerHTML = Number(i.product.price - aksia.toFixed()).toLocaleString() + ' сум'
+      
   
         //appending
         item.append(item_top, item_bottom)
@@ -95,21 +95,21 @@ export function favreload(arr, place) {
         b_basket.append(basket_img)
         place.append(item)
   
-        itop_img.onclick = () => {
-          
-        };
-        i_name.onclick = () => {
-          
-          
-        };
+        itop_img.onclick = (event) => {
+            event.preventDefault();
+           
+          location.href = `/pages/dinam/?id=${i.product.id}`
+        } 
         b_basket.onclick = () => {
             alert("Товар добавлен в корзину!")
           }
         b_heart.onclick = () => {
-            let idx = arr.indexOf(item.id)
-            arr.splice(idx, 1)
-            item.remove()
-            // reload(goods)
+            deleteData(`/wishes/` + i.id)
+                .then(() => {
+                    b_img.classList.remove('bbb')
+                    b_img.src = "/icons/free-icon-heart-3502230.png"
+                    item.remove()
+                })
         }
         
       }

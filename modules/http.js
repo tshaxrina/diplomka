@@ -15,7 +15,7 @@ export const postData = async(path, body) => {
         const res = await axios.post(base + path, body)
         return res
     } catch (e) {
-        alert(isError)
+        alert('Network error')
     }
 }
 export const patchData = async(path, body) => {
@@ -26,28 +26,17 @@ export const patchData = async(path, body) => {
         alert('Network error')
     }
 }
-// export const deleteData = async(path) => {
-//     try {
-//         const res = await axios.delete(base + path)
-//         return res
-//     } catch (e) {
-//         alert('Network error')
-//     }
-// }
-
-export class MakeRequest {
-    baseURL = import.meta.env.VITE_BASE_URL
-
-
-    async getData(path) {
-        try {
-            const res = await axios.get(this.baseURL + path);
-
-            if (res.status === 200 || res.status === 201) {
-                return res.data;
-            }
-        } catch (e) {
-            alert(e.message);
-            return e;
+export const deleteData = async(path) => {
+    try {
+        const res = await axios.delete(base + path)
+        if(res.status === 200 || res.status === 201) {
+            return res.data
         }
-    } }
+    } catch (e) {
+        alert(e.message)
+        return e
+    }
+}
+
+
+

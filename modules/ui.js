@@ -1,6 +1,5 @@
 export function reload_slides(arr, place) {
-    place.innerHTML = '';
-  
+    // place.innerHTML = '';
     for (let item of arr) {
         place.innerHTML += `
         <div class="swiper-slide">
@@ -9,7 +8,7 @@ export function reload_slides(arr, place) {
         <h2 class="price">${item.price} сум</h2>
        <p class="description">${item.description.slice(0, 500)}</p>
         </div>
-        <div class="yellow">
+        <div class="white">
         <img src="${item.media[0]}" >
         </div>
        </div>

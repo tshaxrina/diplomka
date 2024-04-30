@@ -1,13 +1,10 @@
-import { getData } from "./http";
+import { getData, postData, deleteData } from "./http";
 import { createHeader, createFooter } from "./helpers";
-// import { reload } from "./helpers";
 
 let body = document.body
 let cont = document.querySelector('main')
 const good_id = location.search.split('=').at(-1)
 if (!good_id) location.assign("/");
-
-// console.log(location.search.split('=').at(-1));
 
 getData(`/goods/` + parseInt(good_id))
 .then((res) => {
@@ -27,7 +24,6 @@ createFooter(body)
 
  function createDinam(products, place) {
     place.innerHTML = ''
-    
  for (let product of products) {
 
     let container = document.createElement("div")
@@ -106,113 +102,70 @@ createFooter(body)
       color_btn.innerHTML = color
       colorBtn.append(color_btn)
     }
-   //  counter++
-   //  if (counter === 5) {
-   //    return
-   //  }
 
-   // //  for (let index = 0; index <= 5; index++) {
-   
-   //    let item = document.createElement('div')
-   //       let item_top = document.createElement('div')
-   //       let itop_img = document.createElement('img')
-   //       let b_heart = document.createElement('button')
-   //       let b_img = document.createElement('img')
-   //       let black_fr = document.createElement('div')
-   //       let item_bottom = document.createElement('div')
-   //       let i_name = document.createElement('a')
-   //       let rating = document.createElement('div')
-   //       let star = document.createElement('img')
-   //       let i_rating = document.createElement('p')
-   //       let month = document.createElement('div')
-   //       let price = document.createElement('div')
-   //       let old_price = document.createElement('p')
-   //       let new_price = document.createElement('p')
-   //       let b_basket = document.createElement('button')
-   //       let basket_img = document.createElement('img')
-         
-         
-   //       //styling
-   //       item.classList.add('item')
-   //       item_top.classList.add('item_top')
-   //       black_fr.classList.add('black_fr')
-   //       item_bottom.classList.add('item_bottom')
-   //       rating.classList.add('rating')
-   //       month.classList.add('month')
-   //       price.classList.add('price')
-   //       old_price.classList.add('old_price')
-   //       new_price.classList.add('new_price')
-     
-   //       //
-   //       i_name.href = `/pages/dinam/?id=${product.id}`
-   //       itop_img.src = product.media[0]
-   //       b_img.src = "/icons/free-icon-heart-3502230.png"
-   //       black_fr.innerHTML = "Акция"
-   //       i_name.innerHTML = product.title
-   //       star.src = "/icons/free-icon-star-8358826.png"
-   //       i_rating.innerHTML = product.rating
-   //       month.innerHTML = "1462 сум/мес"
-   //       old_price.innerHTML = product.price
-   //       new_price.innerHTML = product.price
-   //       basket_img.src = "/icons/free-icon-shopping-bag-4903482.png"
-   
-   //       //appending
-   //       item.append(item_top, item_bottom)
-   //       item_top.append(itop_img, b_heart, black_fr)
-   //       b_heart.append(b_img)
-   //       item_bottom.append(i_name, rating, month, price, b_basket)
-   //       rating.append(star, i_rating)
-   //       price.append(old_price, new_price)
-   //       b_basket.append(basket_img)
-   //       place.append(item)
-   
-   
-   //       b_heart.onclick = () => {
-   
-   //         if(fav.includes(product.id)) {
-   //           let idx = fav.indexOf(product.id)
-   //           fav.splice(idx, 1)
-   
-   //           b_img.classList.remove('bbb')
-   //           b_img.src = "/icons/free-icon-heart-3502230.png"
-   //       } else {
-   //           fav.push(i.id)
-   //           b_img.classList.add('bbb')
-   //           b_img.src = "/icons/Vector.png"
+    getData(`/wishes/?product_id=${product.id}`)
+                .then((res) => {
+                    if (res.data.length === 0) {
+                      add_fav.classList.remove('liked')
+                    } else if (res.data.length === 1) {
+                      add_fav.classList.add('liked')
+                    }
+                })
+
+    getData(`/carts/?product_id=${product.id}`)
+    .then((res) => {
+        if (res.data.length === 0) {
+          add_bask.classList.remove('incart')
+        } else if (res.data.length === 1) {
+          add_bask.classList.add('incart')
+        }
+    })
+
+    add_bask.onclick = () => {
+      if(!add_bask.classList.contains('incart')) {
+        postData('/carts', {
+          product_id: product.id,
+          count: 1,
+          product: product
+        })
+          .then((res) => {
+              if (res.status === 200 || res.status === 201) {
+                add_bask.classList.add('incart')
+              }
+          }) } else {
+            getData(`/carts/?product_id=${product.id}`)
+             .then((res) => {
+                 deleteData(`/carts/${res.data[0].id}`)
+                     .then(() => {
+                       add_bask.classList.remove('incart')
+                     })
+             })
              
-   //       }
-   //       if (buttonAdd.classList.contains('active')) {
-   //           reload(fav)
-   //       } 
-   //     }
-   
-   //       b_basket.onclick = () => {
-   //         alert("Товар добавлен в корзину!")
-   //       }
-   
-   //       itop_img.onclick = (event) => {
-   //         event.preventDefault();
-          
-   //       location.href = `/pages/dinam/?id=${index.id}`
-   //       }      
-   //     }
-//     pls.onclick = () => {
-//       num.innerHTML++
-//       price.innerHTML = +(item.price * num.innerHTML).toFixed(2) + " сум"
-//       pr_ed.innerHTML = item.price + "ед/сум"
-//   total = +(total + item.price).toFixed(2) + " сум"
-// }
-// mns.onclick = () => {
-//   if (num.innerHTML > 0) {
-//       console.log("inoon");
-//       num.innerHTML--
-//       price.innerHTML = +(item.price * num.innerHTML).toFixed(2) + " сум"
-//   }
-//   if (num.innerHTML === 1) {
-//       pr_ed.innerHTML = ""
-//   }
-//   total = +(total - item.price).toFixed(2) + " сум"
-// }
+         }
+    }
+
+    add_fav.onclick = () => {
+      if(!add_fav.classList.contains('liked')) {
+        postData('/wishes', {
+          product_id: product.id,
+          product: product
+      })
+          .then((res) => {
+              if (res.status === 200 || res.status === 201) {
+                add_fav.classList.add('liked')
+              }
+          })
+    } else {
+       getData(`/wishes?product_id=${product.id}`)
+        .then((res) => {
+            deleteData(`/wishes/${res.data[0].id}`)
+                .then(() => {
+                  add_fav.classList.remove('liked')
+                })
+        })
+        
+    }
+    }
  }}
 
  function tovar(tovars, place) {
@@ -221,7 +174,7 @@ createFooter(body)
  for (let index of tovars) {
    
    counter++
-    if (counter === 7) {
+    if (counter === 6) {
       return
     }
     
@@ -279,26 +232,6 @@ createFooter(body)
       b_basket.append(basket_img)
       mesto.append(item)
       place.append(mesto)
-
-
-      b_heart.onclick = () => {
-
-        if(fav.includes(index.id)) {
-          let idx = fav.indexOf(index.id)
-          fav.splice(idx, 1)
-
-          b_img.classList.remove('bbb')
-          b_img.src = "/icons/free-icon-heart-3502230.png"
-      } else {
-          fav.push(i.id)
-          b_img.classList.add('bbb')
-          b_img.src = "/icons/Vector.png"
-          
-      }
-      if (buttonAdd.classList.contains('active')) {
-          reload(fav)
-      } 
-    }
 
       b_basket.onclick = () => {
         alert("Товар добавлен в корзину!")

@@ -1,5 +1,6 @@
+import { postData, getData, deleteData } from "./http";
 
-let fav = []
+
 export let cart = JSON.parse(localStorage.getItem("liked")) || [];
 
 export function reload(arr, place) {
@@ -37,16 +38,17 @@ export function reload(arr, place) {
       new_price.classList.add('new_price')
   
       //
-      i_name.href = "/pages/dinam/?id=${i.id}"
+      i_name.href = `/pages/dinam/?id=${i.id}`
       itop_img.src = i.media[0]
       b_img.src = "/icons/free-icon-heart-3502230.png"
       black_fr.innerHTML = "Акция"
       i_name.innerHTML = i.title
       star.src = "/icons/free-icon-star-8358826.png"
       i_rating.innerHTML = i.rating
-      month.innerHTML = "1462 сум/мес"
-      old_price.innerHTML = i.price
-      new_price.innerHTML = i.price
+      month.innerHTML = Number(Math.round(i.price/12).toFixed()).toLocaleString() + ' сум/мес'
+      old_price.innerHTML = Number(i.price.toFixed()).toLocaleString() + ' сум'
+      let aksia = Math.round((i.price * i.salePercentage)/100)
+      new_price.innerHTML = Number(i.price - aksia.toFixed()).toLocaleString() + ' сум'
       basket_img.src = "/icons/free-icon-shopping-bag-4903482.png"
 
       //appending
@@ -59,55 +61,65 @@ export function reload(arr, place) {
       b_basket.append(basket_img)
       place.append(item)
 
+      getData(`/wishes/?product_id=${i.id}`)
+                .then((res) => {
+                    if (res.data.length === 0) {
+                        b_img.src = "/icons/free-icon-heart-3502230.png"
+                    } else if (res.data.length === 1) {
+                        b_heart.classList.add('liked')
+                        b_img.src = "/icons/Vector.png"
+                    }
+                })
 
       b_heart.onclick = () => {
-
-        if(fav.includes(i.id)) {
-          let idx = fav.indexOf(i.id)
-          fav.splice(idx, 1)
-
-          b_img.classList.remove('bbb')
-          b_img.src = "/icons/free-icon-heart-3502230.png"
+        if(!b_heart.classList.contains('liked')) {
+          postData('/wishes', {
+            product_id: i.id,
+            product: i
+        })
+            .then((res) => {
+                if (res.status === 200 || res.status === 201) {
+                  b_heart.classList.add('liked')
+                  b_img.src = "/icons/Vector.png"
+                }
+            })
       } else {
-          fav.push(i.id)
-          b_img.classList.add('bbb')
-          b_img.src = "/icons/Vector.png"
+         getData(`/wishes/?product_id=${i.id}`)
+          .then((res) => {
+              deleteData(`/wishes/${res.data[0].id}`)
+                  .then(() => {
+                    b_heart.classList.remove('liked')
+                    b_img.src = "/icons/free-icon-heart-3502230.png"
+                  })
+          })
           
       }
-      // if (b_img.classList.contains('bbb')) {
-      //     reload(fav)
-      // } 
-    }
+  }
 
       b_basket.onclick = () => {
-        
-          if (cart.includes(i.id)) {
-              // delete
-              let idx = cart.indexOf(i.id)
-              cart.splice(idx, 1)
-              alert("Удален из корзины!")
-              localStorage.setItem("liked", JSON.stringify(cart));
-          } else {
-              alert("Товар добавлен в корзину!")
-              cart.push(i)
-              localStorage.setItem("liked", JSON.stringify(cart));
-          }
-
-          if (toCartId.includes(item.id)) {
-            toCartId = toCartId.filter((el) => el !== item.id);
-            localStorage.setItem("liked", JSON.stringify(toCartId));
-          } else {
-            toCartId.push(item.id);
-            
-          }
+          if(!b_basket.classList.contains('incart')) {
+            postData('/carts', {
+              product_id: i.id,
+              count: 1,
+              product: i
+            })
+              .then((res) => {
+                  if (res.status === 200 || res.status === 201) {
+                    b_basket.classList.add('incart')
+                    alert("Товар добавлен в корзину!")
+                  }
+              })
+      } else {
+        alert('Уже в корзине!')
       }
+      
 
       itop_img.onclick = (event) => {
         event.preventDefault();
        
       location.href = `/pages/dinam/?id=${i.id}`
       }      
-    }
+    } }
   }
 
 export function createHeader(place) {
